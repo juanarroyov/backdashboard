@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5f202a3499adc12f23f212c8"},"username":"user Admin","password":"pbkdf2:sha256:150000$hCPIaaQS$657ab8ba5a8f5c59ba07844200f531fdd81c8aceba88124dc903ae561a596b1e","scope":"admin"}
+{"_id":{"$oid":"5f230f79cf84244c4088b380"},"username":"Usuario Test","password":"pbkdf2:sha256:150000$gx4XzMfj$7005dc26e85e253c797926ebf87251abec0f2589fc75c6b359621f89d1d3b8ea","scope":"user"}

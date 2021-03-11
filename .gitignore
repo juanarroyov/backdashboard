@@ -1,0 +1,7 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+local_config.py
+local_config.ini
+.vscode/
+venv/
+admin3_test/

@@ -1,0 +1,3 @@
+[submodule "xentric_task"]
+	path = xentric_task
+	url = https://github.com/CHSTR/xentric_task.git
