@@ -4,6 +4,7 @@ from bson import json_util
 from bson.objectid import ObjectId
 from pprint import pprint
 from db import Mongo
+from datetime import datetime
 from v1.utils.paginated_list import get_paginated_list
 
 global Mongo
@@ -37,8 +38,10 @@ class ConversacionModel:
                 valid=False
                 error = 'No se encontró la conversacion identificada como "'+id_conversacion+'". Asegurese de llamar un valor que ya exista.'
             return recurso, valid, error        
-        elif fechaInicio and fechaTermino:
-            recurso = self.coleccion.find({"$and": [{"conversacion.fecha": {"$gte": (fechaInicio)}},{"conversacion.fecha": {"$lte": (fechaTermino)}}]}, {'_id':0})      
+        elif fechaInicio and fechaTermino:  
+            print(fechaInicio)
+            print(fechaTermino)
+            recurso = self.coleccion.find({'fecha': {'$gte': fechaInicio, '$lt': fechaTermino}}, {'_id':0})      
             resultado = get_paginated_list(recurso, url, start, limit)
             return resultado
         else:
