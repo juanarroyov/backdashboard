@@ -1,5 +1,6 @@
 import pymongo
 from pymongo import IndexModel, ASCENDING, DESCENDING
+from datetime import datetime
 from bson import json_util
 from bson.objectid import ObjectId
 from pprint import pprint
@@ -11,7 +12,7 @@ global Mongo
 class ConversacionModel:
     #Instancia coleccion y carga
     def __init__(self, valores_unicos=[]):
-        self.coleccion = Mongo('API_EJEMPLO').collection
+        self.coleccion = Mongo('conversaciones').collection
         #Elimina todos los indices al instanciarce la api
         self.coleccion.drop_indexes()
         #Se le crea un indice a los campos con valores unicos para que lanze error cuando se ingrese un valor repetido.
@@ -38,10 +39,16 @@ class ConversacionModel:
                 error = 'No se encontró la conversacion identificada como "'+id_conversacion+'". Asegurese de llamar un valor que ya exista.'
             return recurso, valid, error        
         elif fechaInicio and fechaTermino:
-            recurso = self.coleccion.find({"$and": [{"conversacion.fecha": {"$gte": (fechaInicio)}},{"conversacion.fecha": {"$lte": (fechaTermino)}}]}, {'_id':0})      
+            recurso = self.coleccion.find({"$and": [{"conversacion.fecha": {"$gte" : (fechaInicio)}},{"conversacion.fecha": {"$lte": (fechaTermino)}}]}, {'_id':0})      
             resultado = get_paginated_list(recurso, url, start, limit)
             return resultado
         else:
+            #start = datetime.datetime.now()
+            #print(start)
+            #end = datetime.datetime.now()
+            #print(end)
+            #'fecha': {'$gte': start, '$lt': end}
+            
             recurso = self.coleccion.find({}, {'_id':0})      
             resultado = get_paginated_list(recurso, url, start, limit)
             return resultado
