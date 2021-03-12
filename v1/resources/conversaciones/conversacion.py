@@ -47,11 +47,8 @@ class Conversacion(Resource):
         
 
     def get(self, id_conversacion):
-        #fechaInicio = request.form['fechaInicio']
-        #fechaInicio = request.args.get('fechaInicio')
-        #print(fechaInicio)
-        #fechaTermino = request.form['fechaTermino']
-        #print(fechaTermino)
+        url = request.base_url
+        args = request.args
         duracion = 'duracion_test'
         #Si existe un id la funcion retorna la configuracion correspondiente a esa lista 
         if id_conversacion:
@@ -68,8 +65,10 @@ class Conversacion(Resource):
             args = request.args
             start = args['start'] if 'start' in args else 1
             limit = args['limit'] if 'limit' in args else 10
+            fechaInicio = args['fechaInicio'] if 'fechaInicio' in args else None
+            fechaTermino = args['fechaTermino'] if 'fechaTermino' in args else None
             #Al poner id_bot como None retorna toda los bots.
-            results = mongo_conversacion.get(duracion, None, url, start, limit)        
+            results = mongo_conversacion.get(duracion, None, url, start, limit, fechaInicio, fechaTermino)        
             return jsonify(results)
    
           

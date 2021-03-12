@@ -28,7 +28,7 @@ class ConversacionModel:
         self.coleccion.insert_one(documento)
         return True, ''
 
-    def get(self, duracion, id_conversacion, url=None, start=None, limit=None):
+    def get(self, duracion, id_conversacion, url=None, start=None, limit=None, fechaInicio=None, fechaTermino=None):
 
         if id_conversacion:
             valid=True; error=''
@@ -37,8 +37,12 @@ class ConversacionModel:
                 valid=False
                 error = 'No se encontró la conversacion identificada como "'+id_conversacion+'". Asegurese de llamar un valor que ya exista.'
             return recurso, valid, error        
+        elif fechaInicio and fechaTermino:
+            recurso = self.coleccion.find({"$and": [{"conversacion.fecha": {"$gte": (fechaInicio)}},{"conversacion.fecha": {"$lte": (fechaTermino)}}]}, {'_id':0})      
+            resultado = get_paginated_list(recurso, url, start, limit)
+            return resultado
         else:
-            recurso = self.coleccion.find({'duracion':duracion}, {'_id':0, 'duracion':0})      
+            recurso = self.coleccion.find({}, {'_id':0})      
             resultado = get_paginated_list(recurso, url, start, limit)
             return resultado
 
