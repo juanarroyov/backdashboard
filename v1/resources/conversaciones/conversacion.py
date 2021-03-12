@@ -67,8 +67,16 @@ class Conversacion(Resource):
             limit = args['limit'] if 'limit' in args else 10
             fechaInicio = args['fechaInicio'] if 'fechaInicio' in args else None
             fechaTermino = args['fechaTermino'] if 'fechaTermino' in args else None
+           # if fechaInicio and fechaTermino:
+            #    fechaInicio = fechaInicio.split("-")
+             #   fechaTermino = fechaTermino.split("-")
+              #  fechaInicio = datetime(int(fechaInicio[0]), int(fechaInicio[1]), int(fechaInicio[2]))
+               # fechaTermino = datetime(int(fechaTermino[0]), int(fechaTermino[1]), int(fechaTermino[2]))
             #Al poner id_bot como None retorna toda los bots.
-            results = mongo_conversacion.get(duracion, None, url, start, limit, fechaInicio, fechaTermino)        
+            results = mongo_conversacion.get(duracion, None, url, start, limit, fechaInicio, fechaTermino)     
+
+            
+
             return jsonify(results)
    
           
